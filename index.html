@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        /* --- Global Styles --- */
+        :root {
+            --primary-color: #333; /* Dark Gray */
+            --secondary-color: #555; /* Medium Gray */
+            --accent-color: #888; /* Light Gray */
+            --background-color: #f8f8f8; /* Off-white */
+            --text-color: #333; /* Dark Gray */
+            --light-text-color: #666; /* Lighter Gray for secondary text */
+            --border-color: #eee; /* Very Light Gray */
+        }
+
+        body {
+            font-family: 'Merriweather', serif; /* Classic Serif Font */
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-family: 'Georgia', serif; /* Slightly different serif for headings */
+            margin-bottom: 15px;
+        }
+
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 1.8em; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; margin-top: 30px; }
+        h3 { font-size: 1.3em; margin-top: 20px; }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: disc;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* --- Header --- */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            margin-bottom: 5px;
+        }
+
+        .header .title {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .header .contact-info {
+            font-size: 0.95em;
+            color: var(--light-text-color);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header .contact-info a {
+            color: var(--light-text-color);
+        }
+
+        /* --- Summary --- */
+        .summary {
+            margin-bottom: 40px;
+        }
+
+        .summary p {
+            text-align: justify;
+        }
+
+        /* --- Section Styling --- */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        /* --- Skills --- */
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background-color: var(--background-color);
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .skill-category h3 {
+            margin-top: 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .skill-category ul {
+            padding-left: 15px;
+            list-style: none;
+        }
+
+        .skill-category li {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        /* --- Experience --- */
+        .experience-item {
+            margin-bottom: 25px;
+        }
+
+        .experience-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .experience-item .company {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .experience-item .date-location {
+            font-size: 0.9em;
+            color: var(--light-text-color);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .experience-item .description ul {
+            font-size: 0.95em;
+            padding-left: 20px;
+        }
+
+        /* --- Projects --- */
+        .project-item {
+            margin-bottom: 25px;
+        }
+
+        .project-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .project-item .project-details {
+            font-size: 0.95em;
+            color: var(--light-text-color);
+            margin-bottom: 10px;
+        }
+
+        .project-item .technologies {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+
+        .project-item .description {
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        /* --- Education --- */
+        .education-item {
+            margin-bottom: 20px;
+        }
+
+        .education-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .education-item .institution {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .education-item .date-location {
+            font-size: 0.9em;
+            color: var(--light-text-color);
+        }
+
+        /* --- Certifications --- */
+        .certifications-list li {
+            font-size: 0.95em;
+        }
+
+        .certification-details {
+            color: var(--light-text-color);
+            font-size: 0.9em;
+        }
+
+        /* --- Languages --- */
+        .languages-list li {
+            font-size: 0.95em;
+        }
+
+        .language-proficiency {
+            color: var(--light-text-color);
+            font-size: 0.9em;
+        }
+
+        /* --- Achievements --- */
+        .achievements-list li {
+            font-size: 0.95em;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .header .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 id="fullName"></h1>
+            <div class="title" id="title"></div>
+            <div class="contact-info">
+                <span id="email"></span>
+                <span id="phone"></span>
+                <span id="website"></span>
+                <span id="linkedin"></span>
+                <span id="github"></span>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section class="summary section" id="summary-section">
+            <p id="summary"></p>
+        </section>
+
+        <!-- Skills -->
+        <section class="skills section" id="skills-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-list" id="skills-list"></div>
+        </section>
+
+        <!-- Experience -->
+        <section class="experience section" id="experience-section">
+            <h2 class="section-title">Experience</h2>
+            <div id="experience-list"></div>
+        </section>
+
+        <!-- Projects -->
+        <section class="projects section" id="projects-section">
+            <h2 class="section-title">Projects</h2>
+            <div id="projects-list"></div>
+        </section>
+
+        <!-- Education -->
+        <section class="education section" id="education-section">
+            <h2 class="section-title">Education</h2>
+            <div id="education-list"></div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="certifications section" id="certifications-section">
+            <h2 class="section-title">Certifications</h2>
+            <ul id="certifications-list"></ul>
+        </section>
+
+        <!-- Languages -->
+        <section class="languages section" id="languages-section">
+            <h2 class="section-title">Languages</h2>
+            <ul id="languages-list"></ul>
+        </section>
+
+        <!-- Achievements -->
+        <section class="achievements section" id="achievements-section">
+            <h2 class="section-title">Achievements</h2>
+            <ul id="achievements-list"></ul>
+        </section>
+    </div>
+
+    <script>
+        const jsonData = {
+          "basics": {
+            "fullName": "",
+            "title": "",
+            "summary": "",
+            "location": {
+              "city": "",
+              "country": ""
+            },
+            "contact": {
+              "email": "",
+              "phone": "",
+              "website": "",
+              "linkedin": "",
+              "github": ""
+            }
+          },
+
+          "skills": [
+            {
+              "category": "",
+              "items": []
+            }
+          ],
+
+          "experience": [
+            {
+              "jobTitle": "",
+              "company": "",
+              "location": "",
+              "startDate": "",
+              "endDate": "",
+              "description": ""
+            }
+          ],
+
+          "projects": [
+            {
+              "name": "",
+              "description": "",
+              "technologies": [],
+              "link": ""
+            }
+          ],
+
+          "education": [
+            {
+              "degree": "",
+              "institution": "",
+              "location": "",
+              "startYear": "",
+              "endYear": ""
+            }
+          ],
+
+          "certifications": [
+            {
+              "name": "",
+              "issuer": "",
+              "year": ""
+            }
+          ],
+
+          "languages": [
+            {
+              "language": "",
+              "proficiency": ""
+            }
+          ],
+
+          "achievements": [""],
+          "interests": []
+        };
+
+        function renderPortfolio(data) {
+            // Basics
+            if (data.basics.fullName) {
+                document.getElementById('fullName').innerText = data.basics.fullName;
+            } else {
+                document.querySelector('.header h1').style.display = 'none';
+            }
+            if (data.basics.title) {
+                document.getElementById('title').innerText = data.basics.title;
+            } else {
+                document.querySelector('.header .title').style.display = 'none';
+            }
+
+            // Contact Info
+            const contactInfo = document.querySelector('.contact-info');
+            if (data.basics.contact.email) {
+                const emailSpan = document.createElement('span');
+                const emailLink = document.createElement('a');
+                emailLink.href = `mailto:${data.basics.contact.email}`;
+                emailLink.textContent = data.basics.contact.email;
+                emailSpan.appendChild(emailLink);
+                contactInfo.appendChild(emailSpan);
+            }
+            if (data.basics.contact.phone) {
+                const phoneSpan = document.createElement('span');
+                phoneSpan.textContent = data.basics.contact.phone;
+                contactInfo.appendChild(phoneSpan);
+            }
+            if (data.basics.contact.website) {
+                const websiteSpan = document.createElement('span');
+                const websiteLink = document.createElement('a');
+                websiteLink.href = data.basics.contact.website;
+                websiteLink.target = '_blank';
+                websiteLink.textContent = 'Website';
+                websiteSpan.appendChild(websiteLink);
+                contactInfo.appendChild(websiteSpan);
+            }
+            if (data.basics.contact.linkedin) {
+                const linkedinSpan = document.createElement('span');
+                const linkedinLink = document.createElement('a');
+                linkedinLink.href = data.basics.contact.linkedin;
+                linkedinLink.target = '_blank';
+                linkedinLink.textContent = 'LinkedIn';
+                linkedinSpan.appendChild(linkedinLink);
+                contactInfo.appendChild(linkedinSpan);
+            }
+            if (data.basics.contact.github) {
+                const githubSpan = document.createElement('span');
+                const githubLink = document.createElement('a');
+                githubLink.href = data.basics.contact.github;
+                githubLink.target = '_blank';
+                githubLink.textContent = 'GitHub';
+                githubSpan.appendChild(githubLink);
+                contactInfo.appendChild(githubSpan);
+            }
+            if (contactInfo.children.length === 0) {
+                document.querySelector('.header .contact-info').style.display = 'none';
+            }
+
+
+            // Summary
+            const summaryElement = document.getElementById('summary');
+            if (data.basics.summary) {
+                summaryElement.innerText = data.basics.summary;
+            } else {
+                document.getElementById('summary-section').style.display = 'none';
+            }
+
+            // Skills
+            const skillsListElement = document.getElementById('skills-list');
+            if (data.skills && data.skills.length > 0 && data.skills[0].category && data.skills[0].items.length > 0) {
+                data.skills.forEach(skillCategory => {
+                    if (skillCategory.category && skillCategory.items.length > 0) {
+                        const categoryDiv = document.createElement('div');
+                        categoryDiv.classList.add('skill-category');
+
+                        const categoryTitle = document.createElement('h3');
+                        categoryTitle.textContent = skillCategory.category;
+                        categoryDiv.appendChild(categoryTitle);
+
+                        const itemsList = document.createElement('ul');
+                        skillCategory.items.forEach(item => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = item;
+                            itemsList.appendChild(listItem);
+                        });
+                        categoryDiv.appendChild(itemsList);
+                        skillsListElement.appendChild(categoryDiv);
+                    }
+                });
+            } else {
+                document.getElementById('skills-section').style.display = 'none';
+            }
+
+            // Experience
+            const experienceListElement = document.getElementById('experience-list');
+            if (data.experience && data.experience.length > 0) {
+                data.experience.forEach(exp => {
+                    if (exp.jobTitle || exp.company || exp.location || exp.startDate || exp.endDate || exp.description) {
+                        const expItem = document.createElement('div');
+                        expItem.classList.add('experience-item');
+
+                        let jobTitleHTML = '';
+                        if (exp.jobTitle) {
+                            jobTitleHTML = `<h3>${exp.jobTitle}</h3>`;
+                        }
+                        expItem.innerHTML += jobTitleHTML;
+
+                        if (exp.company) {
+                            const companySpan = document.createElement('span');
+                            companySpan.classList.add('company');
+                            companySpan.textContent = exp.company;
+                            expItem.appendChild(companySpan);
+                        }
+
+                        const dateLocationSpan = document.createElement('div');
+                        dateLocationSpan.classList.add('date-location');
+                        let dateLocationText = '';
+                        if (exp.startDate || exp.endDate) {
+                            dateLocationText += `${exp.startDate || ''} - ${exp.endDate || ''}`.trim();
+                        }
+                        if (exp.location) {
+                            if (dateLocationText) dateLocationText += ' | ';
+                            dateLocationText += exp.location;
+                        }
+                        dateLocationSpan.textContent = dateLocationText.trim();
+                        expItem.appendChild(dateLocationSpan);
+
+
+                        if (exp.description) {
+                            const descriptionDiv = document.createElement('div');
+                            descriptionDiv.classList.add('description');
+                            const descriptionList = document.createElement('ul');
+                            const descriptionItems = exp.description.split('•').filter(item => item.trim());
+                            descriptionItems.forEach(item => {
+                                const listItem = document.createElement('li');
+                                listItem.textContent = item.trim();
+                                descriptionList.appendChild(listItem);
+                            });
+                            descriptionDiv.appendChild(descriptionList);
+                            expItem.appendChild(descriptionDiv);
+                        }
+                        experienceListElement.appendChild(expItem);
+                    }
+                });
+            }
+            if (experienceListElement.children.length === 0) {
+                document.getElementById('experience-section').style.display = 'none';
+            }
+
+
+            // Projects
+            const projectsListElement = document.getElementById('projects-list');
+            if (data.projects && data.projects.length > 0) {
+                data.projects.forEach(project => {
+                    if (project.name || project.description || project.technologies.length > 0 || project.link) {
+                        const projectItem = document.createElement('div');
+                        projectItem.classList.add('project-item');
+
+                        if (project.name) {
+                            const projectName = document.createElement('h3');
+                            projectName.textContent = project.name;
+                            projectItem.appendChild(projectName);
+                        }
+
+                        if (project.link) {
+                            const projectLink = document.createElement('a');
+                            projectLink.href = project.link;
+                            projectLink.target = '_blank';
+                            projectLink.textContent = 'View Project';
+                            projectItem.appendChild(projectLink);
+                        }
+
+                        if (project.description) {
+                            const description = document.createElement('p');
+                            description.classList.add('description');
+                            description.textContent = project.description;
+                            projectItem.appendChild(description);
+                        }
+
+                        if (project.technologies && project.technologies.length > 0) {
+                            const technologiesSpan = document.createElement('span');
+                            technologiesSpan.classList.add('technologies');
+                            technologiesSpan.textContent = `Technologies: ${project.technologies.join(', ')}`;
+                            projectItem.appendChild(technologiesSpan);
+                        }
+                        projectsListElement.appendChild(projectItem);
+                    }
+                });
+            }
+            if (projectsListElement.children.length === 0) {
+                document.getElementById('projects-section').style.display = 'none';
+            }
+
+            // Education
+            const educationListElement = document.getElementById('education-list');
+            if (data.education && data.education.length > 0) {
+                data.education.forEach(edu => {
+                    if (edu.degree || edu.institution || edu.location || edu.startYear || edu.endYear) {
+                        const eduItem = document.createElement('div');
+                        eduItem.classList.add('education-item');
+
+                        if (edu.degree) {
+                            const degreeHeader = document.createElement('h3');
+                            degreeHeader.textContent = edu.degree;
+                            eduItem.appendChild(degreeHeader);
+                        }
+
+                        if (edu.institution) {
+                            const institutionSpan = document.createElement('span');
+                            institutionSpan.classList.add('institution');
+                            institutionSpan.textContent = edu.institution;
+                            eduItem.appendChild(institutionSpan);
+                        }
+
+                        const dateLocationSpan = document.createElement('div');
+                        dateLocationSpan.classList.add('date-location');
+                        let dateLocationText = '';
+                        if (edu.startYear || edu.endYear) {
+                            dateLocationText += `${edu.startYear || ''} - ${edu.endYear || ''}`.trim();
+                        }
+                        if (edu.location) {
+                            if (dateLocationText) dateLocationText += ' | ';
+                            dateLocationText += edu.location;
+                        }
+                        dateLocationSpan.textContent = dateLocationText.trim();
+                        eduItem.appendChild(dateLocationSpan);
+
+                        educationListElement.appendChild(eduItem);
+                    }
+                });
+            }
+            if (educationListElement.children.length === 0) {
+                document.getElementById('education-section').style.display = 'none';
+            }
+
+            // Certifications
+            const certificationsListElement = document.getElementById('certifications-list');
+            if (data.certifications && data.certifications.length > 0) {
+                data.certifications.forEach(cert => {
+                    if (cert.name || cert.issuer || cert.year) {
+                        const certItem = document.createElement('li');
+                        certItem.textContent = cert.name;
+                        if (cert.issuer || cert.year) {
+                            const detailsSpan = document.createElement('span');
+                            detailsSpan.classList.add('certification-details');
+                            let detailsText = '';
+                            if (cert.issuer) detailsText += cert.issuer;
+                            if (cert.year) {
+                                if (detailsText) detailsText += ' - ';
+                                detailsText += cert.year;
+                            }
+                            detailsSpan.textContent = ` (${detailsText})`;
+                            certItem.appendChild(detailsSpan);
+                        }
+                        certificationsListElement.appendChild(certItem);
+                    }
+                });
+            }
+            if (certificationsListElement.children.length === 0) {
+                document.getElementById('certifications-section').style.display = 'none';
+            }
+
+            // Languages
+            const languagesListElement = document.getElementById('languages-list');
+            if (data.languages && data.languages.length > 0) {
+                data.languages.forEach(lang => {
+                    if (lang.language || lang.proficiency) {
+                        const langItem = document.createElement('li');
+                        langItem.textContent = lang.language;
+                        if (lang.proficiency) {
+                            const proficiencySpan = document.createElement('span');
+                            proficiencySpan.classList.add('language-proficiency');
+                            proficiencySpan.textContent = ` (${lang.proficiency})`;
+                            langItem.appendChild(proficiencySpan);
+                        }
+                        languagesListElement.appendChild(langItem);
+                    }
+                });
+            }
+            if (languagesListElement.children.length === 0) {
+                document.getElementById('languages-section').style.display = 'none';
+            }
+
+            // Achievements
+            const achievementsListElement = document.getElementById('achievements-list');
+            if (data.achievements && data.achievements.length > 0) {
+                data.achievements.forEach(achievement => {
+                    if (achievement) {
+                        const achItem = document.createElement('li');
+                        achItem.textContent = achievement;
+                        achievementsListElement.appendChild(achItem);
+                    }
+                });
+            }
+            if (achievementsListElement.children.length === 0) {
+                document.getElementById('achievements-section').style.display = 'none';
+            }
+
+            // Hide any section that ended up empty
+            document.querySelectorAll('.section').forEach(section => {
+                if (section.children.length === 1 && section.querySelector('.section-title') && section.children[0].id.endsWith('-list') && section.querySelector('.section-title').nextElementSibling.children.length === 0) {
+                    section.style.display = 'none';
+                }
+                 if (section.id === 'summary-section' && section.querySelector('p').innerText === '') {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPortfolio(jsonData);
+        });
+    </script>
+</body>
+</html>
